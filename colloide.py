@@ -51,14 +51,14 @@ def wolf():
 	print("       || ||             '-'")
 	print("       '-''-'\n")
 def check_names(infile):
-    if os.path.exists(infile):
-	banner()
-	wolf()
-	findAdmin()
-    else:
-        banner()
-	opts()
-	print("Invalid path to the wordlis. File could not be found.")
+	if os.path.exists(infile):
+		banner()
+		wolf()
+		findAdmin()
+	else:
+        	banner()
+		opts()
+		print("Invalid path to the wordlis. File could not be found.")
 	 
 def findAdmin():
 	f = open(links,"r");
