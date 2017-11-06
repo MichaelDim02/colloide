@@ -56,7 +56,7 @@ def check_names(infile):
 		wolf()
 		findAdmin()
 	else:
-        	banner()
+		banner()
 		opts()
 		print("Invalid path to the wordlis. File could not be found.")
 	 
@@ -77,7 +77,7 @@ def findAdmin():
 		except URLError as e:
 			continue
 		else:
-			print "[+] Link Found -> ",req_link
+			print("[+] Link Found -> ",req_link)
 
 
 
