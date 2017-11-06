@@ -62,7 +62,7 @@ def check_names(infile):
 	 
 def findAdmin():
 	f = open(links,"r");
-	print "[!] Report bugs: anivsante2@gmail.com \n"
+	print("[!] Report bugs: anivsante2@gmail.com \n")
 	while True:
 		sub_link = f.readline()
 		if not sub_link:
