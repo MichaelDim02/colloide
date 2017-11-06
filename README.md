@@ -1,5 +1,5 @@
 # colloide
-#MCD's Colloide v0.2 // 2017 // Thessaloniki, Greece
+#MCD's Colloide v0.5 // 2017 // Thessaloniki, Greece
 #Michael Constantine Dimopoulos ----------------------------------------------
 Colloide is an extremely simple information gathering tool with the solid purpose of finding working admin login web-pages.
 Written with python - meant to be used on linux (Debian)
