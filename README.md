@@ -8,7 +8,7 @@ To open:
 1) Locate the file
 2) CD to that directory with terminal
 3) type "python colloide.py"
-4) (OPTIONAL) run with flag '-t 1' to enable tor proxy passthrough which defaults to localhost
+4) (OPTIONAL) run with flag '-t 1' to enable tor proxy passthrough
 --------------------
 How it works:
 All it does is go through a list (links.txt) with all the common admin page names and finds

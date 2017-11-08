@@ -8,10 +8,10 @@ import os
 import socks
 import socket
 try: # For Python 3.0 and later
-	from urllib.request import Request, urlopen, build_opener, install_opener, ProxyHandler
+	from urllib.request import Request, urlopen
 	from urllib.error import URLError, HTTPError
 except ImportError: # Fall back to Python 2's urllib2
-	from urllib2 import Request, urlopen, ProxyHandler, URLError, HTTPError
+	from urllib2 import Request, urlopen, URLError, HTTPError
 
 # STEM module for signaling tor network service
 from stem import Signal
