@@ -84,7 +84,7 @@ def findAdmin(torEnabled=0):
 	print("[!] Report bugs: anivsante2@gmail.com \n") # https://github.com/MichaelDim02/colloide/issues instead?
 
 	if torEnabled:
-		print("You have enabled Tor proxy passthrough. Please be aware that this might significantly slow down the scan.")
+		print("You have enabled Tor proxy passthrough. Please be aware that this could maybe significantly slow down the scan.")
 		socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, TOR_DEFAULT_PROXY_IP, TOR_DEFAULT_PROXY_PORT)
 		socket.socket = socks.socksocket
 
@@ -120,7 +120,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-u", "--URL", help="The URL to the website")
 parser.add_argument("-p", "--pages", help="Path to the wordlist with the page names / links")
 parser.add_argument("-l", "--legals", action='store_true', help="License & legal disclaimer")
-parser.add_argument("-t", "--torenable", help="Enable proxying through TOR to 'anonymize' traffic (requires TOR to be running and controller configured (default port 9051)) !!! WILL INCREASE RUN TIME DRAMATICALLY !!!")
+parser.add_argument("-t", "--torenable", help="Whether to enable tor proxying (1) or not (0)")
 args = parser.parse_args()
 links = args.pages
 URL = args.URL
