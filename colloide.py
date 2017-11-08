@@ -83,10 +83,10 @@ def findAdmin(torEnabled=0):
 	f = open(links,"r");
 	print("[!] Report bugs: anivsante2@gmail.com \n") # https://github.com/MichaelDim02/colloide/issues instead?
 
-	if torIsEnabled:
+	if torEnabled:
+		print("You have enabled Tor proxy passthrough. Please be aware that this might significantly slow down the scan.")
 		socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, TOR_DEFAULT_PROXY_IP, TOR_DEFAULT_PROXY_PORT)
 		socket.socket = socks.socksocket
-		print("You have enabled Tor proxy passthrough. Please be aware that this might significantly slow down the scan.")
 
 	while True:
 		generateNewTorIP()
@@ -103,32 +103,24 @@ def findAdmin(torEnabled=0):
 		except URLError as e:
 			continue
 		else:
+			log(link, req_link)
 			print("[+] Link Found -> ",req_link)
 
 def generateNewTorIP(password="el_passwordo", controllerPort=TOR_DEFAULT_CONTROLLER_PROXY_PORT):
-    controller.authenticate(password=password)
-    controller.signal(Signal.NEWNYM)
+	controller.authenticate(password=password)
+	controller.signal(Signal.NEWNYM)
 
 def log(name, data):
 	if not os.path.exists(DEBUG_OUTPUT_DIR):
 		os.makedirs(DEBUG_OUTPUT_DIR)
-	logFile = open(DEBUG_OUTPUT_DIR + name.replace("/", ""), "w")
-
-	req = Request('http://httpbin.org/ip')
-	try:
-		response = urlopen(req)
-	except HTTPError as e:
-		print(e)
-	except URLError as e:
-		print(e)
-
-	logFile.write(str(response.read(200)))
+	logFile = open(DEBUG_OUTPUT_DIR + name.replace("/", ""), "a")
+	logFile.write(data)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-u", "--URL", help="The URL to the website")
 parser.add_argument("-p", "--pages", help="Path to the wordlist with the page names / links")
 parser.add_argument("-l", "--legals", action='store_true', help="License & legal disclaimer")
-parser.add_argument("-t", "--torenable", help="Enable proxying through TOR to anonymize traffic (requires TOR to be running and controller configured (default port 9051)) !!! WILL INCREASE RUN TIME DRAMATICALLY !!!")
+parser.add_argument("-t", "--torenable", help="Enable proxying through TOR to 'anonymize' traffic (requires TOR to be running and controller configured (default port 9051)) !!! WILL INCREASE RUN TIME DRAMATICALLY !!!")
 args = parser.parse_args()
 links = args.pages
 URL = args.URL
