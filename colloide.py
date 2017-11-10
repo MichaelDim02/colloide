@@ -2,12 +2,13 @@
 # Thessaloniki, GREECE 2017 - greekhacking.gr 
 # Michael Constantine Dimopoulos
 # GNU General Public Lisence
+# Pronounced: Kow Lowd
 import sys 
 import argparse
 import os
 from urllib2 import Request, urlopen, URLError, HTTPError
 
-def banner():
+def banner(): #banner with logo - patorjk.com 
 	print("_________        .__  .__         .__    .___     ")
 	print("\_   ___ \  ____ |  | |  |   ____ |__| __| _/____  ")
 	print("/    \  \/ /  _ \|  | |  |  /  _ \|  |/ __ |/ __ \ ")
@@ -50,37 +51,38 @@ def wolf():
 	print("_______| /|.'       '.l \\\_") 
 	print("       || ||             '-'")
 	print("       '-''-'\n")
-def check_names(infile):
+def check_names(infile):    #Checking the path to the wordlist
 	if os.path.exists(infile):
-		banner()
-		wolf()
-		findAdmin()
-	else:
+		banner()    #calls the banner function
+		wolf()      #calls the sexy ASCII wolf wallpaper
+		findAdmin() #calls the function that basically does the job 
+	else: #in case wordlist cant be found
 		banner()
 		opts()
 		print("Invalid path to the wordlis. File could not be found.")
 	 
 def findAdmin():
 	f = open(links,"r");
-	print("[!] Report bugs: anivsante2@gmail.com \n")
+	print("[!] Report bugs: anivsante2@gmail.com \n") #OR https://github.com/MichaelDim02/colloide.py/issues
 	while True:
-		sub_link = f.readline()
+		sub_link = f.readline() #Page name
 		if not sub_link:
 			break
-		link = URL
-		req_link = "http://"+link+"/"+sub_link
+		link = URL #website name
+		req_link = "http://"+link+"/"+sub_link #Final link for attempt
 		req = Request(req_link)
 		try:
 			response = urlopen(req)
+			#identifies links that show up HTTP error
 		except HTTPError as e:
 			continue
 		except URLError as e:
-			continue
-		else:
-			print("[+] Link Found -> ",req_link)
+			continue 
+		else: #prints working link
+			print "[+] Link Found -> " + req_link
 
 
-
+#Argument parsing 
 parser = argparse.ArgumentParser()
 parser.add_argument("-u", "--URL", help="The URL to the website")
 parser.add_argument("-p", "--pages", help="Path to the wordlist with the page names / links") 
