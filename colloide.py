@@ -106,8 +106,8 @@ def findAdmin():
 		print("[!] Invalid URL address. Connection could not be established;\n")
 		sys.exit(0)
 	fi = open(links,"r");
-	attempts = 0
-	while (attempts <= int(limit)): 
+	found = 0
+	while (found <= int(limit)): 
 		try:
 			sub_link = fi.readline() #Page name
 			if not sub_link:
@@ -124,6 +124,7 @@ def findAdmin():
 				continue 
 			else: #prints working link
 				print("[+] Link Found -> " + req_link)
+				found = found + 1
 				if txt:
 					f = open(str(tfilename) ,'a')
 					f.write(req_link + "\n")
@@ -133,7 +134,6 @@ def findAdmin():
 			print("\n[!] Process has been terminated - Ctrl + C has been pressed.\n")
 			print("All working pages have been saved at: ", tfilename, "\n")	
 			sys.exit(0)
-		attempts = attempts + 1
 	if attempts > int(limit):
 		print("[!] Process has been terminated due to the limitation that has been set\n")
 	print("All working pages have been saved at: ", tfilename, "\n")
