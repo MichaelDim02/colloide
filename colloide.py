@@ -37,7 +37,7 @@ def opts():
 	print("    -u --URL     The URL to the website")
 	print("    -p --pages   Path to the wordlist with the page names / links")
 	print("    -l --legals  License & legal disclaimer")
-	print("    -s --save    Save pages on a text file (name of the file will be asked lat)")
+	print("    -s --save    Save pages on a text file (name of the file)")
 	print("    -L --limit   Add limit to the pages (Integer)\n\n")
 def legals():
 	#License
