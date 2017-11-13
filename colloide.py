@@ -134,7 +134,7 @@ def findAdmin():
 			print("\n[!] Process has been terminated - Ctrl + C has been pressed.\n")
 			print("All working pages have been saved at: ", tfilename, "\n")	
 			sys.exit(0)
-	if attempts > int(limit):
+	if found > int(limit):
 		print("[!] Process has been terminated due to the limitation that has been set\n")
 	print("All working pages have been saved at: ", tfilename, "\n")
 
