@@ -76,7 +76,7 @@ def check_names(infile):    #Checking the path to the wordlist
 	else: #in case wordlist cant be found
 		banner()
 		opts()
-		print("[-] Invalid path to the wordlis. File could not be found.\n")
+		print("[-] Invalid path to the wordlist. File could not be found.\n")
 	 
 def findAdmin():
 	if txt:
