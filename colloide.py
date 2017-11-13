@@ -160,7 +160,7 @@ elif args.legals:
 else:
 	banner()
 	opts()
-print("Usage: python colloide.py -u [URL] -p [WORDLIST]")
+print("Usage: python colloide.py -u [URL] -p [WORDLIST] -s [TEXT FILE] -L [NUMBER]")
 
 #Can be modified 
 #Can be distributed commercially
