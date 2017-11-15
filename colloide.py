@@ -136,7 +136,8 @@ def findAdmin():
 			sys.exit(0)
 	if found > int(limit):
 		print("[!] Process has been terminated due to the limitation that has been set\n")
-	print("All working pages have been saved at: ", tfilename, "\n")
+	if txt:
+		print("All working pages have been saved at: ", tfilename, "\n")
 
 #Argument parsing 
 parser = argparse.ArgumentParser()
