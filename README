@@ -1,19 +1,60 @@
-MCD's Colloide v0.6 // 2017 // Thessaloniki, Greece 
+                                 .: MCD's Colloide v0.6 :.
+				    
+MCD's Colloide version 0.7 // 2017 // Thessaloniki, Greece
+
+What it is about:
 Colloide is an extremely simple information gathering tool with the solid purpose of finding working admin login web-pages. 
-Written in python - meant to be used on linux (Debian)
-To open:
-1) Locate the file
-2) CD to that directory with terminal
-3) type "python colloide.py"
---------------------
+
+Language:  Python
+version:   0.7
+Code:      Open source
+License:   GNU GPL
+
+  				 _.:' VERSION DIARY ':._
+
+ In version 0.1:
+	Program is working!
+ In version 0.2:
+	Minor bugs fixed
+	Updated the links file
+ In version 0.3:
+	Major bug fixed
+	Minor bugs fixed as well
+	Updated the links file
+ 	Added option / argument parsing
+	Added legals
+ In version 0.4:
+	Minor bugs fixed
+	General stracture has been updated
+	Wordlist option added - Only links.txt could be used before this update
+	Added ASCII logo
+	Added the sexy ASCII wolf
+ In version 0.5 MAJOR RELEASE
+	Minor bugs fixed
+	Major bug fixed
+	Updated ASCII logo
+	Updated ASCII wolf
+	Program has been released to the masses!
+ In version 0.6:
+ 	Minor bugs fixed
+ 	Option to save the pages into a txt page added
+ 	Added some comments to help contributors read the code
+ 	Added a function that checks whether the URL is valid or not
+ In version 0.7:
+	One major bug fixed
+	Minor bugs fixed as well
+
 How it works:
 All it does is go through a list (links.txt) with all the common admin page names and finds 
 the ones that work.
 
 		[!] Legal Disclaimer [!]
+Information Distributed by this tool can be used maliciously.
+The developer has no responsibility for any damage caused by
+this tool / script. We strongly advice this tool to be used
+legally and ethically.
 
-Colloide is a pentesting tool, and we all know that such tools can be 
-used maliciously to gain access or information you're are not supposed 
-to have. We strongly advice you to use this tool legally. The developer 
-has no responsiblity for any damage caused by this tool / script. 
-
+CONTRIBUTE TO THE PROJECT:
+  https://github.com/MichaelDim02/colloide
+  Report bugs: anivsante2@gmail.com
+  or /issues if you use github
