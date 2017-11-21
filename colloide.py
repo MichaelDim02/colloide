@@ -1,19 +1,58 @@
-# Colloide v0.6
+#!/usr/bin/python
+#
+# MCD's Colloide v0.7
 # Thessaloniki, GREECE 2017 - greekhacking.gr 
 # Michael Constantine Dimopoulos
 # GNU General Public Lisence
 # Pronounced: Kow Lawd
-# In this version (0.6):
-# Minor bugs fixed
-# Option to save the pages into a txt page added
-# Added some comments to help contributors read the code
-# Added a function that checks whether the URL is valid or not
-# https://github.com/MichaelDim02/colloide
-# Report bugs: anivsante2@gmail.com 
-# or /issues if you use github
-# # # # # # # # # # # # # # # # # # 
+#
+#     DO NOT USE FOR MALICIOUS PURPOSES! 
+#                THE DEVELOPER HAS NO RESPONSIBLITY FOR ANY DAMAGE CAUSED!
+#
+#
+#  				 _.:' VERSION DIARY ':._
+#
+# In version 0.1:
+#	Program is working!
+# In version 0.2:
+#	Minor bugs fixed
+#	Updated the links file
+# In version 0.3:
+#	Major bug fixed
+#	Minor bugs fixed as well
+#	Updated the links file
+# 	Added option / argument parsing
+#	Added legals
+# In version 0.4:
+#	Minor bugs fixed
+#	General stracture has been updated
+#	Wordlist option added - Only links.txt could be used before this update
+#	Added ASCII logo
+#	Added the sexy ASCII wolf
+# In version 0.5 MAJOR RELEASE
+#	Minor bugs fixed
+#	Major bug fixed
+#	Updated ASCII logo
+#	Updated ASCII wolf
+#	Program has been released to the masses!
+# In version 0.6:
+# 	Minor bugs fixed
+# 	Option to save the pages into a txt page added
+# 	Added some comments to help contributors read the code
+# 	Added a function that checks whether the URL is valid or not
+# In version 0.7:
+#	One major bug fixed
+#	Minor bugs fixed as well
+#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#   https://github.com/MichaelDim02/colloide
+#   Report bugs: anivsante2@gmail.com
+#   or /issues if you use github
+# 
+# # # # # # # # # # # # # # # # # # # # # # # #  
 
-#CODE:
+# MODULES / LIBRARIES:
 
 from __future__ import print_function #because some print functions print quotation marks and commas
 import sys 
@@ -22,36 +61,41 @@ import os
 import socket
 from urllib2 import Request, urlopen, URLError, HTTPError
 
-def banner(): #banner with logo - patorjk.com 
+# CODE:
+
+def banner(): #banner with logo - patorjk.com
+	print("MCD's")
 	print("_________        .__  .__         .__    .___     ")
 	print("\_   ___ \  ____ |  | |  |   ____ |__| __| _/____  ")
 	print("/    \  \/ /  _ \|  | |  |  /  _ \|  |/ __ |/ __ \ ")
 	print("\     \___(  <_> )  |_|  |_(  <_> )  / /_/ \  ___/")
 	print(" \______  /\____/|____/____/\____/|__\____ |\___  >")
 	print("        \/                                \/    \/ ")
-	print("Colloide v 0.6")
+	print("MCD's")
+	print("Colloide v 0.7")
 	print("Michael C. Dimopoulos 2017")
 	print("www.greekhacking.gr\n\n")
 def opts():
-	print("    -h  --help   Display the help panel (Shown right now)")
-	print("    -u --URL     The URL to the website")
-	print("    -p --pages   Path to the wordlist with the page names / links")
-	print("    -l --legals  License & legal disclaimer")
-	print("    -s --save    Save pages on a text file (name of the file)")
-	print("    -L --limit   Add limit to the pages (Integer)\n\n")
+	print("    -h --help     Display the help panel (Shown right now)")
+	print("    -u --URL      The URL to the website")
+	print("    -p --pages    Path to the wordlist with the page names / links")
+	print("    -l --legals   License & legal disclaimer")
+	print("    -s --save     Save pages on a text file (name of the file)")
+	print("    -L --limit    Add limit to the pages (Integer)")
+	print("    -v --verbose  Show all attempts\n\n")
 def legals():
 	#License
-	print("Colloide version 0.6 is free software. It can be re-distributed ")
-	print("and / or modified under the terms of the GNU General Public License") 
+	print("MCD's Colloide version 0.7 is free software. It can be re-distributed ")
+	print("and / or modified under the terms of the GNU General Public License")
 	print("as published by the Free Software Foundation; For more information")
-	print("read the GNU General Public License that comes") 
+	print("read the GNU General Public License that comes")
 	print("along with this program.\n\n")
 	#Disclaimer
 	print("[!] Legal Disclaimer [!]")
 	print("Information distributed by this tool may be used maliciously.")
 	print("The developer has no responsibility for any damage caused by")
 	print("this script or any unauthorized use of it.\n") 
-def wolf(): 
+def wolf():
 	#prints the ASCII colloide wolf
 	print(" ___________________      ,     ,")
 	print("[ COLLOIDE MISSION! ]     |\---/|       __--__")
@@ -85,7 +129,7 @@ def findAdmin():
 		#tfilename = raw_input(">> ")       WONT BE USED - YOU CAN REMOVE IT
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
-		f.write("Colloide v0.6\n")
+		f.write("MCD's Colloide v0.7\n")
 		f.write("Michel Constantine Dimopoulos\n")
 		f.write("Thessaloniki, Greece 2017\n")
 		f.write("greekhacking.gr\n")
@@ -115,15 +159,25 @@ def findAdmin():
 			link = URL #website name
 			req_link = "http://"+link+"/"+sub_link #Final link for attempt
 			req = Request(req_link)
+			if ver:
+				notworking = "[ATTEMPT] - " + req_link
+				#notworking.rstrip() So it does not print lines between attempt output line
 			#identifies links that show up HTTP error
 			try:
 				response = urlopen(req)
 			except HTTPError as e:
+				if ver:
+					print(notworking.rstrip()) 
 				continue
 			except URLError as e:
+				if ver:
+					print(notworking.rstrip())
 				continue 
 			else: #prints working link
-				print("[+] Link Found -> " + req_link)
+				if ver != True:
+					print("[+] Link Found -> " + req_link + "") # if verbose if off 
+				if ver:
+					print("\n[+] Link Found -> " + req_link + "") #because in verbose mode failed attempts don't have \n at the end
 				found = found + 1
 				if txt:
 					f = open(str(tfilename) ,'a')
@@ -132,7 +186,8 @@ def findAdmin():
 					pass
 		except KeyboardInterrupt:
 			print("\n[!] Process has been terminated - Ctrl + C has been pressed.\n")
-			print("All working pages have been saved at: ", tfilename, "\n")	
+			if txt:
+				print("All working pages have been saved at: ", tfilename, "\n")	
 			sys.exit(0)
 	if found > int(limit):
 		print("[!] Process has been terminated due to the limitation that has been set\n")
@@ -146,12 +201,15 @@ parser.add_argument("-p", "--pages", help="Path to the wordlist with the page na
 parser.add_argument("-l", "--legals", action='store_true', help="License & legal disclaimer")
 parser.add_argument("-s", "--save", help="Save all working pages on a text file")
 parser.add_argument("-L", "--limit", help="Add limit to the pages. Integer", default="10")
+parser.add_argument("-v", "--verbose", help="Show all attempts", action="store_true")
+
 #Declaring Argument Variables
 args = parser.parse_args()
 links = args.pages
 URL = args.URL
 txt = args.save
 limit = args.limit
+ver = args.verbose
 
 if args.URL and args.pages:
 	check_names(links)
@@ -163,6 +221,8 @@ else:
 	opts()
 print("Usage: python colloide.py -u [URL] -p [WORDLIST] -s [TEXT FILE] -L [NUMBER]")
 
+#MCD's
+#Colloide v0.7
 #Can be modified 
 #Can be distributed commercially
 #Can be distributed non-commercially 
