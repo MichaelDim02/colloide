@@ -43,6 +43,7 @@
 # In version 0.7:
 #	One major bug fixed
 #	Minor bugs fixed as well
+#	Added the verbose feature
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
