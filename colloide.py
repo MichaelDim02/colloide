@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# MCD's Colloide v0.7
+# MCD's Colloide v0.8
 # Thessaloniki, GREECE 2017 - greekhacking.gr 
 # Michael Constantine Dimopoulos
 # GNU General Public Lisence
@@ -43,11 +43,16 @@
 # In version 0.7:
 #	One major bug fixed
 #	Minor bugs fixed as well
-#	Added the verbose feature
+# In version 0.8:
+#	Added colors
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-#   https://github.com/MichaelDim02/colloide
+#   Project on GitHub:
+#	http://yamechanic.com/C3vc
+#   Website:
+#	http://yamechanic.com/C41V
+#
 #   Report bugs: anivsante2@gmail.com
 #   or /issues if you use github
 # 
@@ -61,6 +66,8 @@ import argparse
 import os
 import socket
 from urllib2 import Request, urlopen, URLError, HTTPError
+import colorama
+from colorama import Fore, Back, Style
 
 # CODE:
 
@@ -73,7 +80,7 @@ def banner(): #banner with logo - patorjk.com
 	print(" \______  /\____/|____/____/\____/|__\____ |\___  >")
 	print("        \/                                \/    \/ ")
 	print("MCD's")
-	print("Colloide v 0.7")
+	print("Colloide v 0.8")
 	print("Michael C. Dimopoulos 2017")
 	print("www.greekhacking.gr\n\n")
 def opts():
@@ -86,7 +93,7 @@ def opts():
 	print("    -v --verbose  Show all attempts\n\n")
 def legals():
 	#License
-	print("MCD's Colloide version 0.7 is free software. It can be re-distributed ")
+	print("MCD's Colloide version 0.8 is free software. It can be re-distributed ")
 	print("and / or modified under the terms of the GNU General Public License")
 	print("as published by the Free Software Foundation; For more information")
 	print("read the GNU General Public License that comes")
@@ -121,7 +128,7 @@ def check_names(infile):    #Checking the path to the wordlist
 	else: #in case wordlist cant be found
 		banner()
 		opts()
-		print("[-] Invalid path to the wordlist. File could not be found.\n")
+		print(Fore.RED + Style.BRIGHT + "[-] Invalid path to the wordlist. File could not be found.\n" + Style.RESET_ALL)
 	 
 def findAdmin():
 	if txt:
@@ -130,16 +137,17 @@ def findAdmin():
 		#tfilename = raw_input(">> ")       WONT BE USED - YOU CAN REMOVE IT
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
-		f.write("MCD's Colloide v0.7\n")
+		f.write("MCD's Colloide v0.8\n")
 		f.write("Michel Constantine Dimopoulos\n")
 		f.write("Thessaloniki, Greece 2017\n")
 		f.write("greekhacking.gr\n")
 		print("\n")
-	print("[!] Report bugs: anivsante2@gmail.com \n") #OR https://github.com/MichaelDim02/colloide.py/issues
-	print("[!] Press Ctrl + C to terminate the process.\n")
+	print(Fore.RED + Style.BRIGHT + "[!] Report bugs: anivsante2@gmail.com \n" + Style.RESET_ALL) 
+					#OR https://github.com/MichaelDim02/colloide.py/issues
+	print(Fore.RED + Style.BRIGHT + "[!] Press Ctrl + C to terminate the process.\n" + Style.RESET_ALL)
 	try:	
 		IP = socket.gethostbyname(URL)
-		print("[!] Attacking host: ", IP, " - ", URL, "\n")
+		print(Fore.RED + Style.BRIGHT + "[!] Attacking host: ", IP, " - ", URL, "\n" + Style.RESET_ALL)
 		if txt:
 			f.write("Attacking:\n")
 			f.write("\n")
@@ -148,7 +156,7 @@ def findAdmin():
 			f.write(str(IP))
 			f.write("\n")
 	except socket.gaierror:
-		print("[!] Invalid URL address. Connection could not be established;\n")
+		print(Fore.RED + Style.BRIGHT + "[!] Invalid URL address. Connection could not be established;\n" + Style.RESET_ALL)
 		sys.exit(0)
 	fi = open(links,"r");
 	found = 0
@@ -168,17 +176,19 @@ def findAdmin():
 				response = urlopen(req)
 			except HTTPError as e:
 				if ver:
-					print(notworking.rstrip()) 
+					print(Fore.GREEN + notworking.rstrip() + Style.RESET_ALL) 
 				continue
 			except URLError as e:
 				if ver:
-					print(notworking.rstrip())
+					print(Fore.GREEN + notworking.rstrip() + Style.RESET_ALL)
 				continue 
 			else: #prints working link
 				if ver != True:
-					print("[+] Link Found -> " + req_link + "") # if verbose if off 
+					print("[+] Link Found -> " + req_link + "") 
+					# if verbose if off 
 				if ver:
-					print("\n[+] Link Found -> " + req_link + "") #because in verbose mode failed attempts don't have \n at the end
+					print("\n[+] Link Found -> " + req_link + "") 
+					#because in verbose mode failed attempts don't have \n at the end
 				found = found + 1
 				if txt:
 					f = open(str(tfilename) ,'a')
@@ -186,12 +196,12 @@ def findAdmin():
 				else:
 					pass
 		except KeyboardInterrupt:
-			print("\n[!] Process has been terminated - Ctrl + C has been pressed.\n")
+			print(Fore.RED + Style.BRIGHT + "\n[!] Process has been terminated - Ctrl + C has been pressed.\n" + Style.RESET_ALL)
 			if txt:
 				print("All working pages have been saved at: ", tfilename, "\n")	
 			sys.exit(0)
 	if found > int(limit):
-		print("[!] Process has been terminated due to the limitation that has been set\n")
+		print(Fore.RED + Style.BRIGHT + "[!] Process has been terminated due to the limitation that has been set\n" + Style.RESET_ALL)
 	if txt:
 		print("All working pages have been saved at: ", tfilename, "\n")
 
@@ -222,11 +232,17 @@ else:
 	opts()
 print("Usage: python colloide.py -u [URL] -p [WORDLIST] -s [TEXT FILE] -L [NUMBER]")
 
-#MCD's
-#Colloide v0.7
-#Can be modified 
-#Can be distributed commercially
-#Can be distributed non-commercially 
-#Under the terms of the GNU general public license (2007)
-#Michael Constantine Dimopoulos
-#https://github.com/MichaelDim02/colloide
+#
+#   MCD's
+#   Colloide v0.8
+#   Can be modified 
+#   Can be distributed commercially
+#   Can be distributed non-commercially 
+#   Under the terms of the GNU general public license (2007)
+#   Michael Constantine Dimopoulos
+#   Project on GitHub:
+#	http://yamechanic.com/C3vc
+#   Website:
+#	http://yamechanic.com/C41V
+#
+# # # # # # # # # # # # # # # # # # # # # # # # #
