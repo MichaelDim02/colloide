@@ -138,7 +138,7 @@ def check_names(infile):    #Checking the path to the wordlist
 		if status_method:
 			banner()    #calls the banner function
 			wolf()      #calls the sexy ASCII wolf wallpaper
-			errorfindAdmin() #calls the function that basically does the job
+			statusfindAdmin() #calls the function that basically does the job
 		elif error_method:
 			banner()  
 			wolf()
@@ -148,7 +148,7 @@ def check_names(infile):    #Checking the path to the wordlist
 		opts()
 		print(Fore.RED + Style.BRIGHT + "[-] Invalid path to the wordlist. File could not be found.\n" + Style.RESET_ALL)
 # THIS IS THE STATUS CODE METHOD
-def errorfindAdmin():
+def statusfindAdmin():
 	if txt:
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
