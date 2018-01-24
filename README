@@ -6,7 +6,7 @@ What it is about:
 Colloide is an extremely simple information gathering tool with the solid purpose of finding working admin login web-pages. 
 
 Language:  Python
-version:   0.9
+version:   0.9.5
 Code:      Open source
 License:   GNU GPL
 
@@ -50,6 +50,8 @@ License:   GNU GPL
 	Added more link wordlists, more specific to each language
  In version 0.9:
 	Added status code method
+In version 0.9.5
+	Quick robots.txt check added
 	
 How it works:
 All it does is go through a list (links.txt) with all the common admin page names and finds 
