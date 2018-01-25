@@ -240,9 +240,9 @@ def statusfindAdmin():
 			if ver:
 				notworking = "[ATTEMPT] - "+ status_code_ + " - " + req_link
 				#notworking.rstrip() So it does not print lines between attempt output line
-			#identifies links that show up HTTP error
-			if status_code_.startswith("4"):
-				print(Fore.GREEN + notworking.rstrip() + Style.RESET_ALL)
+				#identifies links that show up HTTP error
+				if status_code_.startswith("4"):
+					print(Fore.GREEN + notworking.rstrip() + Style.RESET_ALL)
 			else:
 				if ver != True:
 					print("[+] Link Found" + " - " + status_code_ +" -"+ " -> " + req_link + "")
