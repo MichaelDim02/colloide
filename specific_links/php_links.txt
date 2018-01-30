@@ -1,6 +1,7 @@
 adminpanel.php
 admin-panel.php
 controlpanel.php
+admin-ajax.php
 admin/account.php
 admin/index.php
 admin/login.php
