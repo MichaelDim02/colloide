@@ -1,0 +1,83 @@
+MCD's Colloide manual.txt
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+How to open:
+1) Open the terminal
+2) Go to the directory colloide.py is inside of
+3) Type "python colloide100.py"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The above will run the python script. By doing so you will be
+presented with a number of options & arguments. On the very top
+you will see "--robots". 
+
+This option is to do a quick check of the
+robots.txt file of a website. To run simply execute the following:
+
+
+	python colloide100.py -u www.example.us -d -c
+
+
+-u stands for URL. After typing -u make sure to write the
+URL (www.example.us) of the site.
+
+-c stands for Content. You can add it to the command if you
+want it to show you the contents of the robots.txt file.
+
+-d stands for Dump. Add it to the command to have a .txt
+file with the contents of the robots.txt file.
+
+~~~~~~~~~
+
+After --robots you will see two options, --status --urlerror
+and a few arguments below them that apply to both.
+
+--status means the program will check if the status
+code is 404 (not found) or valid. Use if the site has 
+costum 404 pages.
+
+--urlerror means that the program will set links as "found"
+if they do not have a URL error. If the site has costum 404
+pages, then no pages will have URL error and all will be 
+set as found. Use if the site does not have costum 404 pages.
+
+	python colloide100.py --status/urlerror -u www.ex.ex -f /admin/ -p links.txt -v -L 10 -s working.txt
+
+-u is the same with -u in --robots
+
+-f stands for folder. -f /admin/ tells the program to look for 
+working links inside the /admin/ folder.
+
+-p is the wordist of pages you want to try.
+
+-v stands for verbose. Use if you want to see the failed attempts
+as well.
+
+-L stands for limit. -L 10 means that after finding 10 working pages
+the program will stop.
+
+-s stands for save. It will save all working links to a .txt file
+of the name that follows.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OTHER FILES, FOLDERS & WORDLISTS:
+
+1) There is a README text file, which is also used as read me
+for the GitHub page. In addition there is the LICENSE of the
+program.
+
+2) The file with the most common admin page names is links.txt. 
+There are two folders with other wordlist. One for possible admin
+page names (/specific_links/), and one for possible file names or
+directories (/file_links/). Also, there is a common.txt file.
+
+3) There is a file for older versions of MCD's Colloide. There you
+can find older version of the program (from 0.8 to 0.95).
+
+4) Extension adder is a program that adds file extensions at the
+end of all lines of a wordlist. Just open it and type the wordlist
+name (must be a text file). Make sure it's a copy of the original
+file, if you do not want the original altered.
+
+5) There is a file with screenshots from previous versions of the
+program. You can delete this one :-)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
