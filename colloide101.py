@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# MCD's Colloide v1.0.0
+# MCD's Colloide v1.0.1
 # Thessaloniki, GREECE 2017 - greekhacking.gr 
 # Michael Constantine Dimopoulos
 # GNU General Public Lisence
@@ -57,6 +57,8 @@
 #	Fixed major bug in the status method (false status code retrieved)
 #	Removed status code from the urlerror method
 #       Red when unauthorized or forbidden in the status method
+# In version 1.0.1
+#	Users are able to disable/enable ascii by typing -a
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 #   Project on GitHub:
@@ -88,7 +90,7 @@ from colorama import Fore, Back, Style
 
 # CODE:
 
-def banner(): #banner with logo - patorjk.com
+def logo(): #logo - patorjk.com
 	print("MCD's")
 	print("_________        .__  .__         .__    .___     ")
 	print("\_   ___ \  ____ |  | |  |   ____ |__| __| _/____  ")
@@ -96,8 +98,16 @@ def banner(): #banner with logo - patorjk.com
 	print("\     \___(  <_> )  |_|  |_(  <_> )  / /_/ \  ___/")
 	print(" \______  /\____/|____/____/\____/|__\____ |\___  >")
 	print("        \/                                \/    \/ ")
+def checkasciilogo():
+	check_value = open(".ascii_disable_option_value.txt","r")
+	checkvalue = check_value.read(1)
+	if checkvalue == "0":
+		logo()
+	check_value.close()
+def banner(): #banner with logo - patorjk.com
+	checkasciilogo()
 	print("MCD's")
-	print("Colloide v 1.0.0")
+	print("Colloide v 1.0.1")
 	print("Michael C. Dimopoulos 2017")
 	print("www.greekhacking.gr\n\n")
 def opts():
@@ -114,10 +124,11 @@ def opts():
 	print("    -l --legals   License & legal disclaimer")
 	print("    -s --save     Save pages on a text file (name of the file)")
 	print("    -L --limit    Add limit to the pages (Integer)")
-	print("    -v --verbose  Show all attempts\n\n")
+	print("    -v --verbose  Show all attempts\n")
+	print("    -a --ascii    Enable/Disabla ASCII\n\n")
 def legals():
 	#License
-	print("MCD's Colloide version 1.0.0 is free software. It can be re-distributed ")
+	print("MCD's Colloide version 1.0.1 is free software. It can be re-distributed ")
 	print("and / or modified under the terms of the GNU General Public License")
 	print("as published by the Free Software Foundation; For more information")
 	print("read the GNU General Public License that comes")
@@ -144,6 +155,15 @@ def wolf():
 	print("_______| /|.'       '.l \\\_") 
 	print("       || ||             '-'")
 	print("       '-''-'\n")
+def checkasciiwolf():
+	check_value = open(".ascii_disable_option_value.txt","r")
+	checkvalue = check_value.read(1)
+	if checkvalue == "0":
+		wolf()
+	else:
+		print(" ___________________ ")
+		print("[ COLLOIDE MISSION! ]\n\n")
+	check_value.close()
 def robots_check():
 	print("MCD's Colloide v1.0.0")
 	print("Report bugs: anivsante2@gmail.com")
@@ -197,11 +217,11 @@ def check_names(infile):    #Checking the path to the wordlist
 	if os.path.exists(infile):
 		if status_method:
 			banner()    #calls the banner function
-			wolf()      #calls the sexy ASCII wolf wallpaper
+			checkasciiwolf()      #calls the sexy ASCII wolf wallpaper
 			statusfindAdmin() #calls the function that basically does the job
 		elif error_method:
 			banner()  
-			wolf()
+			checkasciiwolf()
 			findAdmin() 
 	else: #in case wordlist cant be found
 		banner()
@@ -212,7 +232,7 @@ def statusfindAdmin():
 	if txt:
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
-		f.write("MCD's Colloide v1.0.0\n")
+		f.write("MCD's Colloide v1.0.1\n")
 		f.write("Michel Constantine Dimopoulos\n")
 		f.write("Thessaloniki, Greece 2017\n")
 		f.write("greekhacking.gr\n")
@@ -288,7 +308,7 @@ def findAdmin():
 	if txt:
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
-		f.write("MCD's Colloide v1.0.0\n")
+		f.write("MCD's Colloide v1.0.1\n")
 		f.write("Michel Constantine Dimopoulos\n")
 		f.write("Thessaloniki, Greece 2017\n")
 		f.write("greekhacking.gr\n")
@@ -356,6 +376,18 @@ def findAdmin():
 	if txt:
 		print("All working pages have been saved at: ", tfilename, "\n")
 
+def change_ascii():
+	ascii_file = open(".ascii_disable_option_value.txt", "r")
+	checkascii = ascii_file.read(1)
+	ascii_file.close()
+	changeascii = open(".ascii_disable_option_value.txt", "w")
+	if checkascii == "1":
+		changeascii.write("0")
+		print("[+] ASCII enabled")
+	elif checkascii == "0":
+		changeascii.write("1")
+		print("[+] ASCII disabled")
+
 #Argument parsing
 parser = argparse.ArgumentParser() 
 parser.add_argument("--robots", action="store_true", help="Check for robots.txt file")
@@ -371,6 +403,7 @@ parser.add_argument("-l", "--legals", action='store_true', help="License & legal
 parser.add_argument("-s", "--save", help="Save all working pages on a text file")
 parser.add_argument("-L", "--limit", help="Add limit to the pages. Integer", default="10")
 parser.add_argument("-v", "--verbose", help="Show all attempts", action="store_true")
+parser.add_argument("-a", "--ascii", help="Enable/Disabla ASCII", action="store_true")
 
 #Declaring Argument Variables
 args = parser.parse_args()
@@ -382,6 +415,7 @@ directory = args.folder
 txt = args.save
 limit = args.limit
 ver = args.verbose
+ascii = args.ascii
 #robots exclusive options / arguments
 robots = args.robots
 dump = args.dump
@@ -403,6 +437,8 @@ elif args.robots and args.URL:
 elif args.legals:
 	banner()
 	legals()
+elif args.ascii:
+	change_ascii()
 else:
 	banner()
 	opts()
@@ -411,7 +447,7 @@ print("Robots: ptyhon colloide100.py --robots -u [URL] -d -c")
 
 #
 #   MCD's
-#   Colloide v1.0.0
+#   Colloide v1.0.1
 #   Can be modified 
 #   Can be distributed commercially
 #   Can be distributed non-commercially 
