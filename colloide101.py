@@ -99,7 +99,7 @@ def logo(): #logo - patorjk.com
 	print(" \______  /\____/|____/____/\____/|__\____ |\___  >")
 	print("        \/                                \/    \/ ")
 def checkasciilogo():
-	check_value = open(".ascii_disable_option_value.txt","r")
+	check_value = open("ascii_disable_option_value.txt","r")
 	checkvalue = check_value.read(1)
 	if checkvalue == "0":
 		logo()
@@ -156,7 +156,7 @@ def wolf():
 	print("       || ||             '-'")
 	print("       '-''-'\n")
 def checkasciiwolf():
-	check_value = open(".ascii_disable_option_value.txt","r")
+	check_value = open("ascii_disable_option_value.txt","r")
 	checkvalue = check_value.read(1)
 	if checkvalue == "0":
 		wolf()
@@ -377,10 +377,10 @@ def findAdmin():
 		print("All working pages have been saved at: ", tfilename, "\n")
 
 def change_ascii():
-	ascii_file = open(".ascii_disable_option_value.txt", "r")
+	ascii_file = open("ascii_disable_option_value.txt", "r")
 	checkascii = ascii_file.read(1)
 	ascii_file.close()
-	changeascii = open(".ascii_disable_option_value.txt", "w")
+	changeascii = open("ascii_disable_option_value.txt", "w")
 	if checkascii == "1":
 		changeascii.write("0")
 		print("[+] ASCII enabled")
