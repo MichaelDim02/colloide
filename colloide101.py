@@ -1,12 +1,12 @@
 #!/usr/bin/python
 #
 # MCD's Colloide v1.0.1
-# Thessaloniki, GREECE 2017 - greekhacking.gr 
+# Thessaloniki, GREECE 2017 - greekhacking.gr
 # Michael Constantine Dimopoulos
 # GNU General Public Lisence
 # Pronounced: Kow Lawd
 #
-#     DO NOT USE FOR MALICIOUS PURPOSES! 
+#     DO NOT USE FOR MALICIOUS PURPOSES!
 #                THE DEVELOPER HAS NO RESPONSIBLITY FOR ANY DAMAGE CAUSED!
 #
 #
@@ -68,8 +68,8 @@
 #
 #   Report bugs: anivsante2@gmail.com
 #   or /issues if you use github
-# 
-# # # # # # # # # # # # # # # # # # # # # # # #  
+#
+# # # # # # # # # # # # # # # # # # # # # # # #
 
 # MODULES / LIBRARIES:
 
@@ -125,7 +125,7 @@ def opts():
 	print("    -s --save     Save pages on a text file (name of the file)")
 	print("    -L --limit    Add limit to the pages (Integer)")
 	print("    -v --verbose  Show all attempts\n")
-	print("    -a --ascii    Enable/Disabla ASCII\n\n")
+	print("    -a --ascii    Enable/Disable ASCII\n\n")
 def legals():
 	#License
 	print("MCD's Colloide version 1.0.1 is free software. It can be re-distributed ")
@@ -137,7 +137,7 @@ def legals():
 	print("[!] Legal Disclaimer [!]")
 	print("Information distributed by this tool may be used maliciously.")
 	print("The developer has no responsibility for any damage caused by")
-	print("this script or any unauthorized use of it.\n") 
+	print("this script or any unauthorized use of it.\n")
 def wolf():
 	#prints the ASCII colloide wolf
 	print(" ___________________      ,     ,")
@@ -152,7 +152,7 @@ def wolf():
 	print("      |  :   /'----'| \  |              __________")
 	print("      \  |\  |      | /| |_______,-----'")
 	print("       '.'| /__,----| \ | ")
-	print("_______| /|.'       '.l \\\_") 
+	print("_______| /|.'       '.l \\\_")
 	print("       || ||             '-'")
 	print("       '-''-'\n")
 def checkasciiwolf():
@@ -166,7 +166,7 @@ def checkasciiwolf():
 	check_value.close()
 def robots_check():
 	print("MCD's Colloide v1.0.0")
-	print("Report bugs: anivsante2@gmail.com")
+	print("Report bugs: /MichaelDim02/colloide.py/issues")
 	print("Robots.txt check function\n")
 	print("INFO:")
 	print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
@@ -183,7 +183,7 @@ def robots_check():
 
 	#if it encouters url error or httperror / exception robots.txt doesn't exist and it prints false
 	#WARNING: This could also mean the given URL is not correct
-	#so it is prevented like so:	
+	#so it is prevented like so:
 	except socket.gaierror:
 		print("[!] Incorrect URL address")
 	except URLError as e:
@@ -205,12 +205,12 @@ def robots_check():
 			dump_name = "robots_%s.txt" % URL
 			rf = open(dump_name, "w+")
 			rf.write(str(contentspage))
-			rf.close()		
+			rf.close()
 			print("\nCONTENT DUMPED AT: ", dump_name)
-		
+
 def scan_start():
-	print(Fore.RED + Style.BRIGHT + "[!] Report bugs: anivsante2@gmail.com \n" + Style.RESET_ALL) 
-					#OR https://github.com/MichaelDim02/colloide.py/issues
+	print(Fore.RED + Style.BRIGHT + "[!] Report bugs: /MichaelDim02/colloide.py/issues \n" + Style.RESET_ALL)
+
 	print(Fore.RED + Style.BRIGHT + "[!] Press Ctrl + C to terminate the process.\n" + Style.RESET_ALL)
 
 def check_names(infile):    #Checking the path to the wordlist
@@ -220,9 +220,9 @@ def check_names(infile):    #Checking the path to the wordlist
 			checkasciiwolf()      #calls the sexy ASCII wolf wallpaper
 			statusfindAdmin() #calls the function that basically does the job
 		elif error_method:
-			banner()  
+			banner()
 			checkasciiwolf()
-			findAdmin() 
+			findAdmin()
 	else: #in case wordlist cant be found
 		banner()
 		opts()
@@ -233,12 +233,12 @@ def statusfindAdmin():
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
 		f.write("MCD's Colloide v1.0.1\n")
-		f.write("Michel Constantine Dimopoulos\n")
+		f.write("Michel C. Dim.\n")
 		f.write("Thessaloniki, Greece 2017\n")
 		f.write("greekhacking.gr\n")
 		print("\n")
 	scan_start()
-	try:	
+	try:
 		IP = socket.gethostbyname(URL)
 		print(Fore.RED + Style.BRIGHT + "[!] Attacking host: ", IP, " - ", URL, "\n" + Style.RESET_ALL)
 		if txt:
@@ -253,7 +253,7 @@ def statusfindAdmin():
 		sys.exit(0)
 	fi = open(links,"r");
 	found = 0
-	while (found <= int(limit)): 
+	while (found <= int(limit)):
 		try:
 			sub_link = fi.readline() #Page name
 			if not sub_link:
@@ -283,7 +283,7 @@ def statusfindAdmin():
 			else:
 				if ver != True:
 					print("[+] Link Found" + " - " + status_code_ +" -"+ " -> " + req_link + "")
-					# if verbose if off 
+					# if verbose if off
 				if ver:
 					print("\n[+] Link Found" + " - " + status_code_ +" -"+ " -> " + req_link + "")
 					#because in verbose mode failed attempts don't have \n at the end
@@ -296,7 +296,7 @@ def statusfindAdmin():
 		except KeyboardInterrupt:
 			print(Fore.RED + Style.BRIGHT + "\n[!] Process has been terminated - Ctrl + C has been pressed.\n" + Style.RESET_ALL)
 			if txt:
-				print("All working pages have been saved at: ", tfilename, "\n")	
+				print("All working pages have been saved at: ", tfilename, "\n")
 			sys.exit(0)
 	if found > int(limit):
 		print(Fore.RED + Style.BRIGHT + "[!] Process has been terminated due to the limitation that has been set\n" + Style.RESET_ALL)
@@ -304,17 +304,17 @@ def statusfindAdmin():
 		print("All working pages have been saved at: ", tfilename, "\n")
 		f.close()
 # THIS IS THE HTTP/URL ERROR METHOD
-def findAdmin(): 
+def findAdmin():
 	if txt:
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
 		f.write("MCD's Colloide v1.0.1\n")
-		f.write("Michel Constantine Dimopoulos\n")
+		f.write("Michael C. Dim.\n")
 		f.write("Thessaloniki, Greece 2017\n")
 		f.write("greekhacking.gr\n")
 		print("\n")
 	scan_start()
-	try:	
+	try:
 		IP = socket.gethostbyname(URL)
 		print(Fore.RED + Style.BRIGHT + "[!] Attacking host: ", IP, " - ", URL, "\n" + Style.RESET_ALL)
 		if txt:
@@ -329,7 +329,7 @@ def findAdmin():
 		sys.exit(0)
 	fi = open(links,"r");
 	found = 0
-	while (found <= int(limit)): 
+	while (found <= int(limit)):
 		try:
 			sub_link = fi.readline() #Page name
 			if not sub_link:
@@ -352,11 +352,11 @@ def findAdmin():
 			except URLError as e:
 				if ver:
 					print(Fore.GREEN + notworking.rstrip() + Style.RESET_ALL)
-				continue 
+				continue
 			else: #prints working link
 				if ver != True:
 					print("[+] Link Found" + " -> " + req_link + "")
-					# if verbose if off 
+					# if verbose if off
 				if ver:
 					print("\n[+] Link Found" + " -> " + req_link + "")
 					#because in verbose mode failed attempts don't have \n at the end
@@ -369,7 +369,7 @@ def findAdmin():
 		except KeyboardInterrupt:
 			print(Fore.RED + Style.BRIGHT + "\n[!] Process has been terminated - Ctrl + C has been pressed.\n" + Style.RESET_ALL)
 			if txt:
-				print("All working pages have been saved at: ", tfilename, "\n")	
+				print("All working pages have been saved at: ", tfilename, "\n")
 			sys.exit(0)
 	if found > int(limit):
 		print(Fore.RED + Style.BRIGHT + "[!] Process has been terminated due to the limitation that has been set\n" + Style.RESET_ALL)
@@ -389,7 +389,7 @@ def change_ascii():
 		print("[+] ASCII disabled")
 
 #Argument parsing
-parser = argparse.ArgumentParser() 
+parser = argparse.ArgumentParser()
 parser.add_argument("--robots", action="store_true", help="Check for robots.txt file")
 parser.add_argument("-d", "--dump", action="store_true", help="Dump the contents to a text file")
 parser.add_argument("-c", "--content", action="store_true", help="Display the contents of robots.txt")
@@ -398,12 +398,12 @@ parser.add_argument("--status", action="store_true", help="Use the HTTP status c
 parser.add_argument("--urlerror", action="store_true", help="Use the HTTP/URL error method")
 parser.add_argument("-u", "--URL", help="The URL to the website")
 parser.add_argument("-f", "--folder", help="Directory to search in (must end and start with '/')")
-parser.add_argument("-p", "--pages", help="Path to the wordlist with the page names / links") 
+parser.add_argument("-p", "--pages", help="Path to the wordlist with the page names / links")
 parser.add_argument("-l", "--legals", action='store_true', help="License & legal disclaimer")
 parser.add_argument("-s", "--save", help="Save all working pages on a text file")
 parser.add_argument("-L", "--limit", help="Add limit to the pages. Integer", default="10")
 parser.add_argument("-v", "--verbose", help="Show all attempts", action="store_true")
-parser.add_argument("-a", "--ascii", help="Enable/Disabla ASCII", action="store_true")
+parser.add_argument("-a", "--ascii", help="Enable/Disable ASCII", action="store_true")
 
 #Declaring Argument Variables
 args = parser.parse_args()
@@ -443,14 +443,14 @@ else:
 	banner()
 	opts()
 print("Usage:  python colloide100.py --[method] -u [URL] -p [WORDLIST] -s [TEXT FILE] -L [NUMBER] -v")
-print("Robots: ptyhon colloide100.py --robots -u [URL] -d -c")
+print("Robots: python colloide100.py --robots -u [URL] -d -c")
 
 #
 #   MCD's
 #   Colloide v1.0.1
-#   Can be modified 
+#   Can be modified
 #   Can be distributed commercially
-#   Can be distributed non-commercially 
+#   Can be distributed non-commercially
 #   Under the terms of the GNU general public license (2007)
 #   Michael Constantine Dimopoulos
 #   Project on GitHub:
