@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# MCD's Colloide v1.0.1
+# MCD's Colloide v1.2
 # Thessaloniki, GREECE 2017 - greekhacking.gr
 # Michael Constantine Dimopoulos
 # GNU General Public Lisence
@@ -15,13 +15,13 @@
 # In version 0.1:
 #	Program is working!
 # In version 0.2:
-#	Minor bugs fixed
+#	Minor bugs fixed	
 #	Updated the links file
 # In version 0.3:
-#	Major bug fixed
-#	Minor bugs fixed as well
-#	Updated the links file
-# 	Added option / argument parsing
+#	Major bug fixed	
+#	Minor bugs fixed as well	
+#	Updated the links file		
+#	Added option / argument parsing
 #	Added legals
 # In version 0.4:
 #	Minor bugs fixed
@@ -58,7 +58,9 @@
 #	Removed status code from the urlerror method
 #       Red when unauthorized or forbidden in the status method
 # In version 1.0.1
-#	Users are able to disable/enable ascii by typing -a
+#	Users are able to disable/enable ascii with -a
+# In version 1.2
+#	Added link testing for 404 in Status method
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 #   Project on GitHub:
@@ -78,6 +80,8 @@ from __future__ import print_function #because some print functions print quotat
 import sys
 import os
 import argparse
+import random
+import string
 #NETWORK MODULES#
 import httplib
 import socket
@@ -107,7 +111,7 @@ def checkasciilogo():
 def banner(): #banner with logo - patorjk.com
 	checkasciilogo()
 	print("MCD's")
-	print("Colloide v 1.0.1")
+	print("Colloide v 1.2")
 	print("Michael C. Dimopoulos 2017")
 	print("www.greekhacking.gr\n\n")
 def opts():
@@ -128,7 +132,7 @@ def opts():
 	print("    -a --ascii    Enable/Disable ASCII\n\n")
 def legals():
 	#License
-	print("MCD's Colloide version 1.0.1 is free software. It can be re-distributed ")
+	print("MCD's Colloide version 1.2 is free software. It can be re-distributed ")
 	print("and / or modified under the terms of the GNU General Public License")
 	print("as published by the Free Software Foundation; For more information")
 	print("read the GNU General Public License that comes")
@@ -165,7 +169,7 @@ def checkasciiwolf():
 		print("[ COLLOIDE MISSION! ]\n\n")
 	check_value.close()
 def robots_check():
-	print("MCD's Colloide v1.0.0")
+	print("MCD's Colloide v1.2")
 	print("Report bugs: /MichaelDim02/colloide.py/issues")
 	print("Robots.txt check function\n")
 	print("INFO:")
@@ -218,11 +222,15 @@ def check_names(infile):    #Checking the path to the wordlist
 		if status_method:
 			banner()    #calls the banner function
 			checkasciiwolf()      #calls the sexy ASCII wolf wallpaper
+			scan_start()
 			statusfindAdmin() #calls the function that basically does the job
+			print(Fore.RED + Style.BRIGHT + "\n[+] Rock bottom;\n" + Style.RESET_ALL)
 		elif error_method:
 			banner()
 			checkasciiwolf()
+			scan_start()
 			findAdmin()
+			print(Fore.RED + Style.BRIGHT + "\n[+] Rock bottom;\n" + Style.RESET_ALL)
 	else: #in case wordlist cant be found
 		banner()
 		opts()
@@ -232,15 +240,15 @@ def statusfindAdmin():
 	if txt:
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
-		f.write("MCD's Colloide v1.0.1\n")
+		f.write("MCD's Colloide v1.2\n")
 		f.write("Michel C. Dim.\n")
 		f.write("Thessaloniki, Greece 2017\n")
 		f.write("greekhacking.gr\n")
 		print("\n")
-	scan_start()
 	try:
 		IP = socket.gethostbyname(URL)
 		print(Fore.RED + Style.BRIGHT + "[!] Attacking host: ", IP, " - ", URL, "\n" + Style.RESET_ALL)
+		print(Fore.RED + Style.BRIGHT + "[+] Status method\n" + Style.RESET_ALL) 
 		if txt:
 			f.write("Attacking:\n")
 			f.write("\n")
@@ -251,6 +259,30 @@ def statusfindAdmin():
 	except socket.gaierror:
 		print(Fore.RED + Style.BRIGHT + "[!] Invalid URL address. Connection could not be established;\n" + Style.RESET_ALL)
 		sys.exit(0)
+	#### 404 TESTING #### # # # # # # # #  #  #  #  #  #  #   #   #   #   #    #    #     #      #       #          # 
+	print(Fore.GREEN + "[.] Testing a random string;" + Style.RESET_ALL)
+	random_digits_for_test = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10))
+	test_string = "colloide-" + random_digits_for_test
+	test_con_link = "http://" + URL + "/" + test_string
+	test_con_ = requests.head(test_con_link)
+	test_int_status_code_ = test_con_.status_code
+	if test_int_status_code_ != 404:
+		print(Fore.RED + Style.BRIGHT + "[!] Testing link " + test_con_link + " did not return 404;" + Style.RESET_ALL)
+		test_option_ = str.lower(raw_input(Fore.RED + Style.BRIGHT + "[?] Do you want to Switch methods (recommended), Abort or Force? [S/A/F] " + Style.RESET_ALL))
+		if test_option_ == "a":
+			print(Fore.RED + Style.BRIGHT + "[!] Aborting...\n" + Style.RESET_ALL)
+			exit(0)
+		elif test_option_ == "f":
+			print(Fore.RED + Style.BRIGHT + "[!] Forcing the Status method. This might not work.\n" + Style.RESET_ALL)
+		elif test_option_ == "s":
+			print(Fore.RED + Style.BRIGHT + "[!] Switching method.\n" + Style.RESET_ALL)
+			findAdmin()
+			print(Fore.RED + Style.BRIGHT + "\n[+] Rock bottom;\n" + Style.RESET_ALL)				
+			exit(0)
+	elif test_int_status_code_ == 404:
+		print(Fore.GREEN + "[+] Testing link " + Style.NORMAL + test_con_link + Style.BRIGHT + " returned 404" + Style.NORMAL + ";" + Style.RESET_ALL)
+		print(Fore.GREEN + "[+] The URL error method is possible; Starting now..\n\n" + Style.RESET_ALL)
+	##################### # # # # # # # #  #  #  #  #  #  #   #   #   #   #    #    #     #      #       #          #  
 	fi = open(links,"r");
 	found = 0
 	while (found <= int(limit)):
@@ -301,22 +333,22 @@ def statusfindAdmin():
 	if found > int(limit):
 		print(Fore.RED + Style.BRIGHT + "[!] Process has been terminated due to the limitation that has been set\n" + Style.RESET_ALL)
 	if txt:
-		print("All working pages have been saved at: ", tfilename, "\n")
+		print("[+] All working pages have been saved at: ", tfilename, "\n")
 		f.close()
 # THIS IS THE HTTP/URL ERROR METHOD
 def findAdmin():
 	if txt:
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
-		f.write("MCD's Colloide v1.0.1\n")
+		f.write("MCD's Colloide v1.2\n")
 		f.write("Michael C. Dim.\n")
 		f.write("Thessaloniki, Greece 2017\n")
 		f.write("greekhacking.gr\n")
 		print("\n")
-	scan_start()
 	try:
 		IP = socket.gethostbyname(URL)
 		print(Fore.RED + Style.BRIGHT + "[!] Attacking host: ", IP, " - ", URL, "\n" + Style.RESET_ALL)
+		print(Fore.RED + Style.BRIGHT + "[+] URL Error method\n" + Style.RESET_ALL)
 		if txt:
 			f.write("Attacking:\n")
 			f.write("\n")
@@ -374,7 +406,7 @@ def findAdmin():
 	if found > int(limit):
 		print(Fore.RED + Style.BRIGHT + "[!] Process has been terminated due to the limitation that has been set\n" + Style.RESET_ALL)
 	if txt:
-		print("All working pages have been saved at: ", tfilename, "\n")
+		print("[+] All working pages have been saved at: ", tfilename, "\n")
 
 def change_ascii():
 	ascii_file = open("ascii_disable_option_value.txt", "r")
@@ -447,7 +479,7 @@ print("Robots: python colloide100.py --robots -u [URL] -d -c")
 
 #
 #   MCD's
-#   Colloide v1.0.1
+#   Colloide v1.2
 #   Can be modified
 #   Can be distributed commercially
 #   Can be distributed non-commercially
