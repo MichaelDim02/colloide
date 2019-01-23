@@ -260,7 +260,7 @@ def statusfindAdmin():
 		print(Fore.RED + Style.BRIGHT + "[!] Invalid URL address. Connection could not be established;\n" + Style.RESET_ALL)
 		sys.exit(0)
 	#### 404 TESTING #### # # # # # # # #  #  #  #  #  #  #   #   #   #   #    #    #     #      #       #          # 
-	print(Fore.GREEN + "[.] Testing a random string;" + Style.RESET_ALL)
+	print(Fore.GREEN + "[-] Testing a random string;" + Style.RESET_ALL)
 	random_digits_for_test = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10))
 	test_string = "colloide-" + random_digits_for_test
 	test_con_link = "http://" + URL + "/" + test_string
@@ -281,7 +281,7 @@ def statusfindAdmin():
 			exit(0)
 	elif test_int_status_code_ == 404:
 		print(Fore.GREEN + "[+] Testing link " + Style.NORMAL + test_con_link + " returned 404" + Style.NORMAL + ";" + Style.RESET_ALL)
-		print(Fore.GREEN + "[+] The Status method is possible; Starting now..\n\n" + Style.RESET_ALL)
+		print(Fore.GREEN + "[+] The Status method is possible; Starting now..\n" + Style.RESET_ALL)
 	##################### # # # # # # # #  #  #  #  #  #  #   #   #   #   #    #    #     #      #       #          #  
 	fi = open(links,"r");
 	found = 0
