@@ -280,7 +280,7 @@ def statusfindAdmin():
 			print(Fore.RED + Style.BRIGHT + "\n[+] Rock bottom;\n" + Style.RESET_ALL)				
 			exit(0)
 	elif test_int_status_code_ == 404:
-		print(Fore.GREEN + "[+] Testing link " + Style.NORMAL + test_con_link + Style.BRIGHT + " returned 404" + Style.NORMAL + ";" + Style.RESET_ALL)
+		print(Fore.GREEN + "[+] Testing link " + Style.NORMAL + test_con_link + " returned 404" + Style.NORMAL + ";" + Style.RESET_ALL)
 		print(Fore.GREEN + "[+] The Status method is possible; Starting now..\n\n" + Style.RESET_ALL)
 	##################### # # # # # # # #  #  #  #  #  #  #   #   #   #   #    #    #     #      #       #          #  
 	fi = open(links,"r");
