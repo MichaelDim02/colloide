@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# MCD's Colloide v1.2
+# MCD's Colloide v1.3
 # Thessaloniki, GREECE 2017 - greekhacking.gr
 # Michael Constantine Dimopoulos
 # GNU General Public Lisence
@@ -61,6 +61,8 @@
 #	Users are able to disable/enable ascii with -a
 # In version 1.2
 #	Added link testing for 404 in Status method
+# In version 1.3
+#	FIXED A HUGE @$$ BUG.
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 #   Project on GitHub:
@@ -92,6 +94,9 @@ from urllib2 import Request, urlopen, URLError, HTTPError
 import colorama
 from colorama import Fore, Back, Style
 
+# VERSION
+version = "v1.3"
+
 # CODE:
 
 def logo(): #logo - patorjk.com
@@ -111,7 +116,7 @@ def checkasciilogo():
 def banner(): #banner with logo - patorjk.com
 	checkasciilogo()
 	print("MCD's")
-	print("Colloide v 1.2")
+	print("Colloide v %s" % version)
 	print("Michael C. Dimopoulos 2017")
 	print("www.greekhacking.gr\n\n")
 def opts():
@@ -125,18 +130,18 @@ def opts():
 	print("    -u --URL      The URL to the website")
 	print("    -f --folder   Directory to search in")
 	print("    -p --pages    Path to the wordlist with the page names / links")
-	print("    -l --legals   License & legal disclaimer")
 	print("    -s --save     Save pages on a text file (name of the file)")
 	print("    -L --limit    Add limit to the pages (Integer)")
 	print("    -v --verbose  Show all attempts\n")
+	print("    -l --legals   License & legal disclaimer")
 	print("    -a --ascii    Enable/Disable ASCII\n\n")
 def legals():
 	#License
-	print("MCD's Colloide version 1.2 is free software. It can be re-distributed ")
+	print("MCD's Colloide version %s is free software. It can be re-distributed ")
 	print("and / or modified under the terms of the GNU General Public License")
 	print("as published by the Free Software Foundation; For more information")
 	print("read the GNU General Public License that comes")
-	print("along with this program.\n\n")
+	print("along with this program.\n\n" % version)
 	#Disclaimer
 	print("[!] Legal Disclaimer [!]")
 	print("Information distributed by this tool may be used maliciously.")
@@ -169,7 +174,7 @@ def checkasciiwolf():
 		print("[ COLLOIDE MISSION! ]\n\n")
 	check_value.close()
 def robots_check():
-	print("MCD's Colloide v1.2")
+	print("MCD's Colloide %s" % version)
 	print("Report bugs: /MichaelDim02/colloide.py/issues")
 	print("Robots.txt check function\n")
 	print("INFO:")
@@ -240,7 +245,7 @@ def statusfindAdmin():
 	if txt:
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
-		f.write("MCD's Colloide v1.2\n")
+		f.write("MCD's Colloide %s\n" % version)
 		f.write("Michel C. Dim.\n")
 		f.write("Thessaloniki, Greece 2017\n")
 		f.write("greekhacking.gr\n")
@@ -287,7 +292,7 @@ def statusfindAdmin():
 	found = 0
 	while (found <= int(limit)):
 		try:
-			sub_link = fi.readline() #Page name
+			sub_link = fi.readline().strip() #Page name
 			if not sub_link:
 				break
 			link = URL #website name
@@ -317,7 +322,7 @@ def statusfindAdmin():
 					print("[+] Link Found" + " - " + status_code_ +" -"+ " -> " + req_link + "")
 					# if verbose if off
 				if ver:
-					print("\n[+] Link Found" + " - " + status_code_ +" -"+ " -> " + req_link + "")
+					print("\n[+] Link Found" + " - " + status_code_ +" -"+ " -> " + req_link + "\n")
 					#because in verbose mode failed attempts don't have \n at the end
 				found = found + 1
 				if txt:
@@ -340,7 +345,7 @@ def findAdmin():
 	if txt:
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
-		f.write("MCD's Colloide v1.2\n")
+		f.write("MCD's Colloide %s\n" % version)
 		f.write("Michael C. Dim.\n")
 		f.write("Thessaloniki, Greece 2017\n")
 		f.write("greekhacking.gr\n")
@@ -479,7 +484,7 @@ print("Robots: python colloide100.py --robots -u [URL] -d -c")
 
 #
 #   MCD's
-#   Colloide v1.2
+#   Colloide v1.3
 #   Can be modified
 #   Can be distributed commercially
 #   Can be distributed non-commercially
