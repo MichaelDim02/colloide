@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# MCD's Colloide v1.3
+# MCD's Colloide v1.4
 # Thessaloniki, GREECE 2017 - greekhacking.gr
 # Michael Constantine Dimopoulos
 # GNU General Public Lisence
@@ -58,11 +58,13 @@
 #	Removed status code from the urlerror method
 #       Red when unauthorized or forbidden in the status method
 # In version 1.0.1
-#	Users are able to disable/enable ascii with -a
+#	Users are able to disable/enable ascii with -a (now -A)
 # In version 1.2
 #	Added link testing for 404 in Status method
 # In version 1.3
 #	FIXED A HUGE @$$ BUG.
+# In version 1.4
+#	You can chage the User-Agent with -a 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 #   Project on GitHub:
@@ -95,7 +97,7 @@ import colorama
 from colorama import Fore, Back, Style
 
 # VERSION
-version = "v1.3"
+version = "v1.4"
 
 # CODE:
 
@@ -116,7 +118,7 @@ def checkasciilogo():
 def banner(): #banner with logo - patorjk.com
 	checkasciilogo()
 	print("MCD's")
-	print("Colloide v %s" % version)
+	print("Colloide %s" % version)
 	print("Michael C. Dimopoulos 2017")
 	print("www.greekhacking.gr\n\n")
 def opts():
@@ -131,22 +133,23 @@ def opts():
 	print("    -f --folder   Directory to search in")
 	print("    -p --pages    Path to the wordlist with the page names / links")
 	print("    -s --save     Save pages on a text file (name of the file)")
-	print("    -L --limit    Add limit to the pages (Integer)")
-	print("    -v --verbose  Show all attempts\n")
-	print("    -l --legals   License & legal disclaimer")
-	print("    -a --ascii    Enable/Disable ASCII\n\n")
+	print("    -l --limit    Add limit to the pages (Integer)")
+	print("    -v --verbose  Show all attempts")
+	print("    -a --agent    Change User-Agent headers\n")
+	print("    -L --legals   License & legal disclaimer")
+	print("    -A --ascii    Enable/Disable ASCII\n\n")
 def legals():
 	#License
-	print("MCD's Colloide version %s is free software. It can be re-distributed ")
+	print("MCD's Colloide version %s is free software. It can be re-distributed " % version)
 	print("and / or modified under the terms of the GNU General Public License")
 	print("as published by the Free Software Foundation; For more information")
 	print("read the GNU General Public License that comes")
-	print("along with this program.\n\n" % version)
+	print("along with this program.\n\n")
 	#Disclaimer
 	print("[!] Legal Disclaimer [!]")
-	print("Information distributed by this tool may be used maliciously.")
+	print("Hacking without prior written permission is illegal")
 	print("The developer has no responsibility for any damage caused by")
-	print("this script or any unauthorized use of it.\n")
+	print("malicious misuse of this program.\n")
 def wolf():
 	#prints the ASCII colloide wolf
 	print(" ___________________      ,     ,")
@@ -299,9 +302,12 @@ def statusfindAdmin():
 			req_link = "http://"+link+"/"+sub_link #Final link for attempt
 			if directory:
 				req_link = "http://"+link+directory+sub_link
-			req = Request(req_link)
-			con_link = link + "/" + sub_link
-			con_ = requests.head(req_link)
+			if agent:
+				user_agent = "Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0"
+				headers = { "User-Agent": user_agent}
+				con_ = requests.head(req_link, headers=headers)
+			else:
+				con_ = requests.head(req_link)
 			int_status_code_ = con_.status_code
 			status_code_ = str(int_status_code_)
 			notworking = "[ATTEMPT] - "+ status_code_ + " - " + req_link
@@ -375,7 +381,12 @@ def findAdmin():
 			req_link = "http://"+link+"/"+sub_link #Final link for attempt
 			if directory:
 				req_link = "http://"+link+directory+sub_link
-			req = Request(req_link)
+			if agent:
+				user_agent = "Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0"
+				headers = { "User-Agent": user_agent}
+				req = Request(req_link, headers=headers)
+			else:
+				req = Request(req_link)
 			if ver:
 				notworking = "[ATTEMPT] - " + req_link
 				#notworking.rstrip() So it does not print lines between attempt output line
@@ -436,11 +447,12 @@ parser.add_argument("--urlerror", action="store_true", help="Use the HTTP/URL er
 parser.add_argument("-u", "--URL", help="The URL to the website")
 parser.add_argument("-f", "--folder", help="Directory to search in (must end and start with '/')")
 parser.add_argument("-p", "--pages", help="Path to the wordlist with the page names / links")
-parser.add_argument("-l", "--legals", action='store_true', help="License & legal disclaimer")
+parser.add_argument("-L", "--legals", action='store_true', help="License & legal disclaimer")
 parser.add_argument("-s", "--save", help="Save all working pages on a text file")
-parser.add_argument("-L", "--limit", help="Add limit to the pages. Integer", default="10")
+parser.add_argument("-l", "--limit", help="Add limit to the pages. Integer", default="10")
 parser.add_argument("-v", "--verbose", help="Show all attempts", action="store_true")
-parser.add_argument("-a", "--ascii", help="Enable/Disable ASCII", action="store_true")
+parser.add_argument("-a", "--agent", help="Change User-Agent headers", action="store_true")
+parser.add_argument("-A", "--ascii", help="Enable/Disable ASCII", action="store_true")
 
 #Declaring Argument Variables
 args = parser.parse_args()
@@ -449,6 +461,7 @@ error_method = args.urlerror
 links = args.pages
 URL = args.URL
 directory = args.folder
+agent = args.agent
 txt = args.save
 limit = args.limit
 ver = args.verbose
@@ -479,12 +492,12 @@ elif args.ascii:
 else:
 	banner()
 	opts()
-print("Usage:  python colloide100.py --[method] -u [URL] -p [WORDLIST] -s [TEXT FILE] -L [NUMBER] -v")
+print("Usage:  python colloide100.py --[method] -u [URL] -p [WORDLIST] -s [TEXT FILE] -l [NUMBER] -v -a")
 print("Robots: python colloide100.py --robots -u [URL] -d -c")
 
 #
 #   MCD's
-#   Colloide v1.3
+#   Colloide v1.4
 #   Can be modified
 #   Can be distributed commercially
 #   Can be distributed non-commercially
