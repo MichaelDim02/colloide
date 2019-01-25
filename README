@@ -1,4 +1,4 @@
-                                 .: MCD's Colloide v1.0.0 :.
+                                 .: MCD's Colloide v1.4 :.
 				    
 MCD's Colloide version 1.0.0 // 2017 // Thessaloniki, Greece
 
@@ -6,7 +6,7 @@ What it is about:
 Colloide is an extremely simple information gathering tool with the solid purpose of finding working admin login web-pages. 
 
 Language:  Python
-version:   1.0.0
+version:   1.4
 Code:      Open source
 License:   GNU GPL
 
@@ -57,6 +57,15 @@ In version 1.0.0:
 	Fixed major bug in the status method (false status code retrieved)
 	Removed status code from the urlerror method
         Red when unauthorized or forbidden in the status method
+In version 1.0.1
+	Users are able to disable/enable ascii with -a (now -A)
+In version 1.2
+	Added link testing for 404 in Status method
+In version 1.3
+	FIXED A HUGE @$$ BUG.
+In version 1.4
+	You can chage the User-Agent with -a 
+
 	
 How it works:
 All it does is go through a list (links.txt) with all the common admin page names and finds 
