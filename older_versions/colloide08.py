@@ -1,8 +1,7 @@
 #!/usr/bin/python
 #
 # MCD's Colloide v0.8
-# Thessaloniki, GREECE 2017 - greekhacking.gr 
-# Michael Constantine Dimopoulos
+# Thessaloniki, GREECE 2017 - greekhacking.gr
 # GNU General Public Lisence
 # Pronounced: Kow Lawd
 #
@@ -81,7 +80,7 @@ def banner(): #banner with logo - patorjk.com
 	print("        \/                                \/    \/ ")
 	print("MCD's")
 	print("Colloide v 0.8")
-	print("Michael C. Dimopoulos 2017")
+	print("MD 2017")
 	print("www.greekhacking.gr\n\n")
 def opts():
 	print("    -h --help     Display the help panel (Shown right now)")
@@ -137,8 +136,6 @@ def findAdmin():
 		#tfilename = raw_input(">> ")       WONT BE USED - YOU CAN REMOVE IT
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
-		f.write("MCD's Colloide v0.8\n")
-		f.write("Michel Constantine Dimopoulos\n")
 		f.write("Thessaloniki, Greece 2017\n")
 		f.write("greekhacking.gr\n")
 		print("\n")
@@ -239,7 +236,6 @@ print("Usage: python colloide.py -u [URL] -p [WORDLIST] -s [TEXT FILE] -L [NUMBE
 #   Can be distributed commercially
 #   Can be distributed non-commercially 
 #   Under the terms of the GNU general public license (2007)
-#   Michael Constantine Dimopoulos
 #   Project on GitHub:
 #	http://yamechanic.com/C3vc
 #   Website:
