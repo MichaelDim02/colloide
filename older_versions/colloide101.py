@@ -1,8 +1,7 @@
 #!/usr/bin/python
 #
 # MCD's Colloide v1.0.1
-# Thessaloniki, GREECE 2017 - greekhacking.gr
-# Michael Constantine Dimopoulos
+# GREECE 2017 - greekhacking.gr
 # GNU General Public Lisence
 # Pronounced: Kow Lawd
 #
@@ -108,7 +107,7 @@ def banner(): #banner with logo - patorjk.com
 	checkasciilogo()
 	print("MCD's")
 	print("Colloide v 1.0.1")
-	print("Michael C. Dimopoulos 2017")
+	print("MD 2017")
 	print("www.greekhacking.gr\n\n")
 def opts():
 	print("  --robots        Check for robots.txt file")
@@ -233,8 +232,7 @@ def statusfindAdmin():
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
 		f.write("MCD's Colloide v1.0.1\n")
-		f.write("Michel C. Dim.\n")
-		f.write("Thessaloniki, Greece 2017\n")
+		f.write("Greece 2017\n")
 		f.write("greekhacking.gr\n")
 		print("\n")
 	scan_start()
@@ -309,8 +307,7 @@ def findAdmin():
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
 		f.write("MCD's Colloide v1.0.1\n")
-		f.write("Michael C. Dim.\n")
-		f.write("Thessaloniki, Greece 2017\n")
+		f.write("MD\n")
 		f.write("greekhacking.gr\n")
 		print("\n")
 	scan_start()
@@ -452,7 +449,6 @@ print("Robots: python colloide100.py --robots -u [URL] -d -c")
 #   Can be distributed commercially
 #   Can be distributed non-commercially
 #   Under the terms of the GNU general public license (2007)
-#   Michael Constantine Dimopoulos
 #   Project on GitHub:
 #	http://yamechanic.com/C3vc
 #   Website:
