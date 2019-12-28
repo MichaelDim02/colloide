@@ -2,7 +2,6 @@
 #
 # MCD's Colloide v1.4
 # Thessaloniki, GREECE 2017 - greekhacking.gr
-# Michael Constantine Dimopoulos
 # GNU General Public Lisence
 # Pronounced: Kow Lawd
 #
@@ -119,7 +118,7 @@ def banner(): #banner with logo - patorjk.com
 	checkasciilogo()
 	print("MCD's")
 	print("Colloide %s" % version)
-	print("Michael C. Dimopoulos 2017")
+	print("MD 2017")
 	print("www.greekhacking.gr\n\n")
 def opts():
 	print("  --robots        Check for robots.txt file")
@@ -249,9 +248,6 @@ def statusfindAdmin():
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
 		f.write("MCD's Colloide %s\n" % version)
-		f.write("Michel C. Dim.\n")
-		f.write("Thessaloniki, Greece 2017\n")
-		f.write("greekhacking.gr\n")
 		print("\n")
 	try:
 		IP = socket.gethostbyname(URL)
@@ -352,8 +348,6 @@ def findAdmin():
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
 		f.write("MCD's Colloide %s\n" % version)
-		f.write("Michael C. Dim.\n")
-		f.write("Thessaloniki, Greece 2017\n")
 		f.write("greekhacking.gr\n")
 		print("\n")
 	try:
@@ -502,7 +496,6 @@ print("Robots: python colloide100.py --robots -u [URL] -d -c")
 #   Can be distributed commercially
 #   Can be distributed non-commercially
 #   Under the terms of the GNU general public license (2007)
-#   Michael Constantine Dimopoulos
 #   Project on GitHub:
 #	http://yamechanic.com/C3vc
 #   Website:
