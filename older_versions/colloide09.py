@@ -152,7 +152,6 @@ def statusfindAdmin():
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
 		f.write("MCD's Colloide v0.9\n")
-		f.write("Thessaloniki, Greece 2017\n")
 		f.write("greekhacking.gr\n")
 		print("\n")
 	scan_start()
