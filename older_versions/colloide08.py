@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 # MCD's Colloide v0.8
-# Thessaloniki, GREECE 2017 - greekhacking.gr
+# GREECE 2017 - greekhacking.gr
 # GNU General Public Lisence
 # Pronounced: Kow Lawd
 #
