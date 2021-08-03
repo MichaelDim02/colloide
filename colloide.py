@@ -1,104 +1,26 @@
 #!/usr/bin/python
-#
-# MCD's Colloide v1.4
-# Thessaloniki, GREECE 2017 - greekhacking.gr
-# GNU General Public Lisence
-# Pronounced: Kow Lawd
-#
-#     DO NOT USE FOR MALICIOUS PURPOSES!
-#                THE DEVELOPER HAS NO RESPONSIBLITY FOR ANY DAMAGE CAUSED!
-#
-#
-#  				 _.:' VERSION DIARY ':._
-#
-# In version 0.1:
-#	Program is working!
-# In version 0.2:
-#	Minor bugs fixed	
-#	Updated the links file
-# In version 0.3:
-#	Major bug fixed	
-#	Minor bugs fixed as well	
-#	Updated the links file		
-#	Added option / argument parsing
-#	Added legals
-# In version 0.4:
-#	Minor bugs fixed
-#	General stracture has been updated
-#	Wordlist option added - Only links.txt could be used before this update
-#	Added ASCII logo
-#	Added the sexy ASCII wolf
-# In version 0.5 MAJOR RELEASE
-#	Minor bugs fixed
-#	Major bug fixed
-#	Updated ASCII logo
-#	Updated ASCII wolf
-#	Program has been released to the masses!
-# In version 0.6:
-# 	Minor bugs fixed
-# 	Option to save the pages into a txt page added
-# 	Added some comments to help contributors read the code
-# 	Added a function that checks whether the URL is valid or not
-# In version 0.7:
-#	One major bug fixed
-#	Minor bugs fixed as well
-# In version 0.8:
-#	Added colors
-# In version 0.8.5
-#	Added status code next to links
-#	Added more link wordlists, more specific to each language
-# In version 0.9:
-#	Added status code method
-# In version 0.9.5
-#	Quick robots.txt check added
-# In version 1.0.0
-#	Directory option added (-f) to search inside of a particular dir
-#	Fixed major bug in the status method (false status code retrieved)
-#	Removed status code from the urlerror method
-#       Red when unauthorized or forbidden in the status method
-# In version 1.0.1
-#	Users are able to disable/enable ascii with -a (now -A)
-# In version 1.2
-#	Added link testing for 404 in Status method
-# In version 1.3
-#	FIXED A HUGE @$$ BUG.
-# In version 1.4
-#	You can chage the User-Agent with -a 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
-#   Project on GitHub:
-#	http://yamechanic.com/C3vc
-#   Website:
-#	http://yamechanic.com/C41V
-#
-#   Report bugs: anivsante2@gmail.com
-#   or /issues if you use github
-#
-# # # # # # # # # # # # # # # # # # # # # # # #
 
-# MODULES / LIBRARIES:
-
-from __future__ import print_function #because some print functions print quotation marks and commas
 #SYSTEM MODULES#
 import sys
 import os
 import argparse
 import random
 import string
+
 #NETWORK MODULES#
-import httplib
+import http.client
 import socket
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import requests
-from urllib2 import Request, urlopen, URLError, HTTPError
+from urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
+
 #STYLE MODULES#
 import colorama
 from colorama import Fore, Back, Style
 
 # VERSION
 version = "v1.4"
-
-# CODE:
 
 def logo(): #logo - patorjk.com
 	print("MCD's")
@@ -108,23 +30,21 @@ def logo(): #logo - patorjk.com
 	print("\     \___(  <_> )  |_|  |_(  <_> )  / /_/ \  ___/")
 	print(" \______  /\____/|____/____/\____/|__\____ |\___  >")
 	print("        \/                                \/    \/ ")
+
 def checkasciilogo():
-	check_value = open("ascii_disable_option_value.txt","r")
+	check_value = open(".ascii_disable_option_value.txt","r")
 	checkvalue = check_value.read(1)
 	if checkvalue == "0":
 		logo()
 	check_value.close()
+
 def banner(): #banner with logo - patorjk.com
 	checkasciilogo()
 	print("MCD's")
 	print("Colloide %s" % version)
-	print("MD 2017")
-	print("www.greekhacking.gr\n\n")
+	print("by MCD 2017-2020\n\n")
+
 def opts():
-	print("  --robots        Check for robots.txt file")
-	print("    -u --URL      The URL to the website")
-	print("    -c --content  Display contents of robots.txt")
-	print("    -d --dump     Dump the contents to a text file\n")
 	print("  --status        Use the HTTP status code method (Faster)")
 	print("  --urlerror      Use the HTTP/URL error method (More reliable)")
 	print("    -h --help     Display the help panel (Shown right now)")
@@ -137,6 +57,7 @@ def opts():
 	print("    -a --agent    Change User-Agent headers\n")
 	print("    -L --legals   License & legal disclaimer")
 	print("    -A --ascii    Enable/Disable ASCII\n\n")
+
 def legals():
 	#License
 	print("MCD's Colloide version %s is free software. It can be re-distributed " % version)
@@ -144,11 +65,7 @@ def legals():
 	print("as published by the Free Software Foundation; For more information")
 	print("read the GNU General Public License that comes")
 	print("along with this program.\n\n")
-	#Disclaimer
-	print("[!] Legal Disclaimer [!]")
-	print("Hacking without prior written permission is illegal")
-	print("The developer has no responsibility for any damage caused by")
-	print("malicious misuse of this program.\n")
+
 def wolf():
 	#prints the ASCII colloide wolf
 	print(" ___________________      ,     ,")
@@ -166,8 +83,9 @@ def wolf():
 	print("_______| /|.'       '.l \\\_")
 	print("       || ||             '-'")
 	print("       '-''-'\n")
+
 def checkasciiwolf():
-	check_value = open("ascii_disable_option_value.txt","r")
+	check_value = open(".ascii_disable_option_value.txt","r")
 	checkvalue = check_value.read(1)
 	if checkvalue == "0":
 		wolf()
@@ -175,53 +93,9 @@ def checkasciiwolf():
 		print(" ___________________ ")
 		print("[ COLLOIDE MISSION! ]\n\n")
 	check_value.close()
-def robots_check():
-	print("MCD's Colloide %s" % version)
-	print("Report bugs: /MichaelDim02/colloide.py/issues")
-	print("Robots.txt check function\n")
-	print("INFO:")
-	print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-	print("URL           =       ", URL)
-	robots_link = "http://"+URL+"/robots.txt"
-	robots_value = False #robots_value - if it has been found or not
-	try:
-		IP = socket.gethostbyname(URL)
-		print("IP            =       ", IP)
-		robot = urllib2.urlopen(robots_link)
-		print("robots        =        True")
-		robots_value = True
-		#robots_value - if it has been found or not
-
-	#if it encouters url error or httperror / exception robots.txt doesn't exist and it prints false
-	#WARNING: This could also mean the given URL is not correct
-	#so it is prevented like so:
-	except socket.gaierror:
-		print("[!] Incorrect URL address")
-	except URLError as e:
-		print("robots        =        False")
-		robots_value = False
-	except HTTPError as e:
-		print("robots        =        False")
-		robots_value = False
-	print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-	if robots_value == True:
-		contentspage = robot.read()
-		#the content that will be dumped / displayed
-		if content:
-			print("CONTENT:")
-			print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-			print(contentspage)
-			print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-		if dump:
-			dump_name = "robots_%s.txt" % URL
-			rf = open(dump_name, "w+")
-			rf.write(str(contentspage))
-			rf.close()
-			print("\nCONTENT DUMPED AT: ", dump_name)
 
 def scan_start():
 	print(Fore.RED + Style.BRIGHT + "[!] Report bugs: /MichaelDim02/colloide.py/issues \n" + Style.RESET_ALL)
-
 	print(Fore.RED + Style.BRIGHT + "[!] Press Ctrl + C to terminate the process.\n" + Style.RESET_ALL)
 
 def check_names(infile):    #Checking the path to the wordlist
@@ -242,19 +116,20 @@ def check_names(infile):    #Checking the path to the wordlist
 		banner()
 		opts()
 		print(Fore.RED + Style.BRIGHT + "[-] Invalid path to the wordlist. File could not be found.\n" + Style.RESET_ALL)
+
 # THIS IS THE STATUS CODE METHOD
 def statusfindAdmin():
 	if txt:
 		tfilename = txt
 		f = open(str(tfilename) ,'w+')
-		f.write("MCD's Colloide %s\n" % version)
+		f.write("Colloide %s\n" % version)
 		print("\n")
 	try:
 		IP = socket.gethostbyname(URL)
-		print(Fore.RED + Style.BRIGHT + "[!] Attacking host: ", IP, " - ", URL, "\n" + Style.RESET_ALL)
+		print(Fore.RED + Style.BRIGHT + "[!] Scanning host: ", IP, " - ", URL, "\n" + Style.RESET_ALL)
 		print(Fore.RED + Style.BRIGHT + "[+] Status method\n" + Style.RESET_ALL) 
 		if txt:
-			f.write("Attacking:\n")
+			f.write("Scanning:\n")
 			f.write("\n")
 			f.write(str(URL))
 			f.write("\n")
@@ -262,7 +137,7 @@ def statusfindAdmin():
 			f.write("\n\n")
 	except socket.gaierror:
 		print(Fore.RED + Style.BRIGHT + "[!] Invalid URL address. Connection could not be established;\n" + Style.RESET_ALL)
-		sys.exit(0)
+		sys.exit(1)
 	#### 404 TESTING #### # # # # # # # #  #  #  #  #  #  #   #   #   #   #    #    #     #      #       #          # 
 	print(Fore.GREEN + "[-] Testing a random string;" + Style.RESET_ALL)
 	random_digits_for_test = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10))
@@ -272,7 +147,7 @@ def statusfindAdmin():
 	test_int_status_code_ = test_con_.status_code
 	if test_int_status_code_ != 404:
 		print(Fore.RED + Style.BRIGHT + "[!] Testing link " + test_con_link + " did not return 404;" + Style.RESET_ALL)
-		test_option_ = str.lower(raw_input(Fore.RED + Style.BRIGHT + "[?] Do you want to Switch methods (recommended), Abort or Force? [S/A/F] " + Style.RESET_ALL))
+		test_option_ = str.lower(input(Fore.RED + Style.BRIGHT + "[?] Do you want to Switch methods (recommended), Abort or Force? [S/A/F] " + Style.RESET_ALL))
 		if test_option_ == "a":
 			print(Fore.RED + Style.BRIGHT + "[!] Aborting...\n" + Style.RESET_ALL)
 			exit(0)
@@ -342,6 +217,7 @@ def statusfindAdmin():
 	if txt:
 		print("[+] All working pages have been saved at: ", tfilename, "\n")
 		f.close()
+
 # THIS IS THE HTTP/URL ERROR METHOD
 def findAdmin():
 	if txt:
@@ -352,10 +228,10 @@ def findAdmin():
 		print("\n")
 	try:
 		IP = socket.gethostbyname(URL)
-		print(Fore.RED + Style.BRIGHT + "[!] Attacking host: ", IP, " - ", URL, "\n" + Style.RESET_ALL)
+		print(Fore.RED + Style.BRIGHT + "[!] Scanning host: ", IP, " - ", URL, "\n" + Style.RESET_ALL)
 		print(Fore.RED + Style.BRIGHT + "[+] URL Error method\n" + Style.RESET_ALL)
 		if txt:
-			f.write("Attacking:\n")
+			f.write("Scanning:\n")
 			f.write("\n")
 			f.write(str(URL))
 			f.write("\n")
@@ -363,7 +239,7 @@ def findAdmin():
 			f.write("\n\n")
 	except socket.gaierror:
 		print(Fore.RED + Style.BRIGHT + "[!] Invalid URL address. Connection could not be established;\n" + Style.RESET_ALL)
-		sys.exit(0)
+		sys.exit(1)
 	fi = open(links,"r");
 	found = 0
 	while (found <= int(limit)):
@@ -419,10 +295,10 @@ def findAdmin():
 		print("[+] All working pages have been saved at: ", tfilename, "\n")
 
 def change_ascii():
-	ascii_file = open("ascii_disable_option_value.txt", "r")
+	ascii_file = open(".ascii_disable_option_value.txt", "r")
 	checkascii = ascii_file.read(1)
 	ascii_file.close()
-	changeascii = open("ascii_disable_option_value.txt", "w")
+	changeascii = open(".ascii_disable_option_value.txt", "w")
 	if checkascii == "1":
 		changeascii.write("0")
 		print("[+] ASCII enabled")
@@ -432,10 +308,6 @@ def change_ascii():
 
 #Argument parsing
 parser = argparse.ArgumentParser()
-parser.add_argument("--robots", action="store_true", help="Check for robots.txt file")
-parser.add_argument("-d", "--dump", action="store_true", help="Dump the contents to a text file")
-parser.add_argument("-c", "--content", action="store_true", help="Display the contents of robots.txt")
-#robots exclusive
 parser.add_argument("--status", action="store_true", help="Use the HTTP status code method")
 parser.add_argument("--urlerror", action="store_true", help="Use the HTTP/URL error method")
 parser.add_argument("-u", "--URL", help="The URL to the website")
@@ -460,24 +332,14 @@ txt = args.save
 limit = args.limit
 ver = args.verbose
 ascii = args.ascii
-#robots exclusive options / arguments
-robots = args.robots
-dump = args.dump
-content = args.content
 
 if error_method:
 	status_method = False
-	robots = False
 elif error_method == False:
 	status_method = True
-	robots = False
-elif error_method == False and status_method == False:
-	robots = True
 
 if args.URL and args.pages:
 	check_names(links)
-elif args.robots and args.URL:
-	robots_check()
 elif args.legals:
 	banner()
 	legals()
@@ -487,18 +349,3 @@ else:
 	banner()
 	opts()
 print("Usage:  python colloide100.py --[method] -u [URL] -p [WORDLIST] -s [TEXT FILE] -l [NUMBER] -v -a")
-print("Robots: python colloide100.py --robots -u [URL] -d -c")
-
-#
-#   MCD's
-#   Colloide v1.4
-#   Can be modified
-#   Can be distributed commercially
-#   Can be distributed non-commercially
-#   Under the terms of the GNU general public license (2007)
-#   Project on GitHub:
-#	http://yamechanic.com/C3vc
-#   Website:
-#	http://yamechanic.com/C41V
-#
-# # # # # # # # # # # # # # # # # # # # # # # # #

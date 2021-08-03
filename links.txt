@@ -5,6 +5,8 @@ login.php
 login.html
 administrator
 admin
+forum
+projects
 adminpanel
 cpanel
 login

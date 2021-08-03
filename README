@@ -1,83 +1,15 @@
-                                 .: MCD's Colloide v1.4 :.
+                              .: MCD's Colloide v1.4 :.
 				    
-MCD's Colloide version 1.0.0 // 2017 // Thessaloniki, Greece
-
 What it is about:
-Colloide is an extremely simple information gathering tool with the solid purpose of finding working admin login web-pages. 
+Colloide is an extremely simple directory bruteforcing tool with the purpose of finding 
+working admin login web-pages, panels and other important data. 
 
 Language:  Python
 version:   1.4
-Code:      Open source
-License:   GNU GPL
+License:   GNU GPL v3.0
 
-  				 _.:' VERSION DIARY ':._
+  				 .oO Contribute Oo.
 
- In version 0.1:
-	Program is working!
- In version 0.2:
-	Minor bugs fixed
-	Updated the links file
- In version 0.3:
-	Major bug fixed
-	Minor bugs fixed as well
-	Updated the links file
- 	Added option / argument parsing
-	Added legals
- In version 0.4:
-	Minor bugs fixed
-	General stracture has been updated
-	Wordlist option added - Only links.txt could be used before this update
-	Added ASCII logo
-	Added the sexy ASCII wolf
- In version 0.5 MAJOR RELEASE
-	Minor bugs fixed
-	Major bug fixed
-	Updated ASCII logo
-	Updated ASCII wolf
-	Program has been released to the masses!
- In version 0.6:
- 	Minor bugs fixed
- 	Option to save the pages into a txt page added
- 	Added some comments to help contributors read the code
- 	Added a function that checks whether the URL is valid or not
- In version 0.7:
-	One major bug fixed
-	Minor bugs fixed as well
- In version 0.8:
- 	Added colors
- In version 0.8.5
-	Added status code next to links
-	Added more link wordlists, more specific to each language
- In version 0.9:
-	Added status code method
-In version 0.9.5
-	Quick robots.txt check added
-In version 1.0.0:
-	Directory option added (-f) to search inside of a particular dir
-	Fixed major bug in the status method (false status code retrieved)
-	Removed status code from the urlerror method
-        Red when unauthorized or forbidden in the status method
-In version 1.0.1
-	Users are able to disable/enable ascii with -a (now -A)
-In version 1.2
-	Added link testing for 404 in Status method
-In version 1.3
-	FIXED A HUGE @$$ BUG.
-In version 1.4
-	You can chage the User-Agent with -a 
-
-	
-How it works:
-All it does is go through a list (links.txt) with all the common admin page names and finds 
-the ones that work.
-
-		[!] Legal Disclaimer [!]
-Information Distributed by this tool can be used maliciously.
-The developer has no responsibility for any damage caused by
-this tool / script. We strongly advice this tool to be used
-legally and ethically.
-
-CONTRIBUTE TO THE PROJECT:
   https://github.com/MichaelDim02/colloide
   Report bugs: anivsante2@gmail.com
   or /issues if you use github
