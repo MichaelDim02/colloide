@@ -1,26 +1,22 @@
 #!/usr/bin/python
 
-#SYSTEM MODULES#
 import sys
 import os
 import argparse
 import random
 import string
-
-#NETWORK MODULES#
 import http.client
 import socket
 import urllib.request, urllib.error, urllib.parse
 import requests
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
-
-#STYLE MODULES#
 import colorama
 from colorama import Fore, Back, Style
 
-# VERSION
+
 version = "v1.4"
+
 
 def logo(): #logo - patorjk.com
 	print("MCD's")
